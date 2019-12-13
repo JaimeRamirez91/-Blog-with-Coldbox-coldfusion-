@@ -1,0 +1,9 @@
+//crear la app
+coldbox create app name=MyRestAPP skeleton=rest
+server start
+//Crear el archivo docker-compose.yaml
+//crear el contenedor  : docker-compose up
+//instalar y configurar :  install cborm
+
+
+
