@@ -1,9 +1,16 @@
+coldbox create orm-entity entityName="users" properties="name,email,username,password,createdDate:date,modifiedDate:date"
+
+cbsecuryty
+
 //crear la app
 coldbox create app name=MyRestAPP skeleton=rest
 server start
 //Crear el archivo docker-compose.yaml
 //crear el contenedor  : docker-compose up
 //instalar y configurar :  install cborm
+//instalar install cbvalidtion,qb,bcrypt,mementifier,cbsecurity
+coldbox create module security
+coldbox create orm-entity entityName="users" properties="name,email,username,password,createdDate:date,modifiedDate:date" directory = "modules_app/security/models"
 
 
 
