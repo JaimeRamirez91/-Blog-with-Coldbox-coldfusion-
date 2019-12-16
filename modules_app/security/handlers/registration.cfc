@@ -51,37 +51,10 @@ component extends = "handlers.BaseHandler"{
 
 		prc.oUser = userService.create( usr )
 		prc.response.setData( {
-			"user" 	: prc.oUser.getMemento(),
-			"token"	: jwtAuth().fromUser( prc.oUser )
+			 "Regiter"   : "successful"
+			//"user" 	: prc.oUser.getMemento(),
+			//"token"	: jwtAuth().fromUser( prc.oUser )
 		} );
 	}
-
-	function index( event, rc, prc ){
-		
-   
-	  prc.response
-		  .setData( jwtAuth().attempt( "jaime", "1234"  ) );
-		 // .addMessage( "Bearer token created and it expires in #jwtAuth().getSettings().jwt.expiration# minutes" );
-	   }
-	
-	/**
-	* index
-	*/
-	function index( event, rc, prc ){
-		var usr = populateModel( ormService.new( "User" ) );
-		usr.setName( "jaime" );
-		usr.setEmail( "q@gmail.com" );
-		usr.setUsername( "jaime" );
-		usr.setPassword( "1234") ;
-   
-	  prc.response
-		  .setData( jwtAuth().attempt( usr.getUsername(), usr.getPassword() ) )
-		  .addMessage( "Bearer token created and it expires in #jwtAuth().getSettings().jwt.expiration# minutes" );
-	
-	}
-	
-
-
-
 	
 }

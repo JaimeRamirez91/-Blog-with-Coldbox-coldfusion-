@@ -3,20 +3,36 @@
 */
 component persistent="true" table="users" accessors="true"{
 	
-	property name="auth" inject="authenticationService@cbauth";
-    property name="qb" inject="provider:QueryBuilder@qb";
+	property name="auth" 
+			 inject="authenticationService@cbauth" 
+			 persistent="false"; // persistent="false" this is ingnored by ORM
+
+	property name="qb" 
+			 inject="provider:QueryBuilder@qb" 
+			 persistent="false"; // persistent="false" this is ingnored by ORM
 
 	// Primary Key
-	property name="id" fieldtype="id" column="id" generator="native" setter="true";
+	property name="id" 
+			 fieldtype="id" 
+			 column="id"
+			 generator="native" 
+			 setter="true";
 	
 	// Properties
-	property name="name" ormtype="string";
-	property name="email" ormtype="string";
-	property name="username" ormtype="string";
-	property name="password" ormtype="string";
-	property name="createdDate" ormtype="date";
-	property name="modifiedDate" ormtype="date";
-	property name="detail" ormtype="string";
+	property name="name" 
+			 ormtype="string";
+	property name="email" 
+			 ormtype="string";
+	property name="username" 
+			 ormtype="string";
+	property name="password" 
+		     ormtype="string";
+	property name="createdDate" 
+			 ormtype="date";
+	property name="modifiedDate" 
+			 ormtype="date";
+	property name="detail"
+			 ormtype="string";
 	
 	
 	// Validation
@@ -31,12 +47,13 @@ component persistent="true" table="users" accessors="true"{
 		neverInclude = [ "password" ]
 	};
 
-	
 	// Constructor
 	function init(){
-		
 		return this;
 	}
+	/**
+	 * isLoaded return boolean
+	 */
 	boolean function isLoaded(){
 		return ( !isNull( variables.id ) && len( variables.id ) );
 	}
@@ -71,7 +88,6 @@ component persistent="true" table="users" accessors="true"{
     boolean function isLoggedIn(){
 		return auth.isLoggedIn();
 	}
-
 }
 
 

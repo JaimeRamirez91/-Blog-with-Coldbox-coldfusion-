@@ -101,18 +101,12 @@ component {
 
 
 		// SES Routes
-		routes = [
-			// Module Entry Point
-			{ pattern="/", handler="home", action="index" },
-			// Convention Route
-			{ pattern="/:handler/:action?" }
-			
-		];
+		routes = [ "config/Router.cfm" ];
 
 		// SES Resources
-		resources = [
+		/*resources = [
 		    { resource="registration" }
-		];
+		];*/
 
 		// Custom Declared Points
 		interceptorSettings = {
