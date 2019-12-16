@@ -74,13 +74,31 @@ component {
 
 		// module settings - stored in modules.name.settings
 		settings = {
-
-		};
-
+			// CB Security Module Settings
+			
+			cbsecurity : {
+				// Module Relocation when an invalid access is detected, instead of each rule declaring one.
+				"invalidAuthenticationEvent"  : "security:Session.onInvalidAuth",
+				// Default Auhtentication Action: override or redirect when a user has not logged in
+				"defaultAuthenticationAction" : "override",
+				// Module override event when an invalid access is detected, instead of each rule declaring one.
+				"invalidAuthorizationEvent"   : "security:Session.onInvalidAuthorization",
+				// Default invalid action: override or redirect when an invalid access is detected, default is to redirect
+				"defaultAuthorizationAction"  : "override",
+				// The validator to use for this module
+				"validator"                   : "JWTService@cbsecurity",
+				// You can define your security rules here or externally via a source
+				"rules"                       : [ { "secureList" : "security:Home\.*" } ]
+			}
+		}
 		// Layout Settings
 		layoutSettings = {
 			defaultLayout = ""
 		};
+		//route( "/:anything", "echo.onInvalidRoute" );
+
+//route( "/:handler/:action" ).end();
+
 
 		// SES Routes
 		routes = [
@@ -88,11 +106,12 @@ component {
 			{ pattern="/", handler="home", action="index" },
 			// Convention Route
 			{ pattern="/:handler/:action?" }
+			
 		];
 
 		// SES Resources
 		resources = [
-			// { resource = "" }
+		    { resource="registration" }
 		];
 
 		// Custom Declared Points
