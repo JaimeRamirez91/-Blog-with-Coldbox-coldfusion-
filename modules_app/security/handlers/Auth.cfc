@@ -18,9 +18,11 @@ component extends = "handlers.BaseHandler"{
 		usr.setEmail( "q@gmail.com" );
 		usr.setUsername( "jaime" );
 		usr.setPassword( "1234") ;
-   
-	  prc.response
-		  .setData( jwtAuth().attempt( usr.getUsername(), usr.getPassword() ) )
+        
+		//generate query for verification 
+		                                     //https://coldbox-security.ortusbooks.com/jwt/jwt-services#jwt-methods
+	  prc.response                                                           //customClaims for implement Roles
+		  .setData( jwtAuth().attempt( usr.getUsername(), usr.getPassword(),  {"roles": ["admin", "user"] }) )
 		  .addMessage( "Bearer token created and it expires in #jwtAuth().getSettings().jwt.expiration# minutes" );
 	
 	}	

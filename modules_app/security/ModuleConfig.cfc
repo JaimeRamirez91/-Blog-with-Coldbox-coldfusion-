@@ -88,9 +88,18 @@ component {
 				// The validator to use for this module
 				"validator"                   : "JWTService@cbsecurity",
 				// You can define your security rules here or externally via a source
-				"rules"                       : [ { "secureList" : "security:Home\.*" } ]
+				"rules"                       : [
+					   
+						  { "secureList" 	:  "security:Home\.*",
+						  	"match"			:  "event",
+						    "roles"			:  "admin",
+						    "permissions"   :  "read" 
+						  } ,
+						  
+					 ]
 			}
 		}
+
 		// Layout Settings
 		layoutSettings = {
 			defaultLayout = ""

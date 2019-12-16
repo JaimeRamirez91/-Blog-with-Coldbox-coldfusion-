@@ -49,6 +49,7 @@ component persistent="true" table="users" accessors="true"{
 
 	// Constructor
 	function init(){
+		variables.permissions = [ "write", "read" ];
 		return this;
 	}
 	/**
@@ -62,14 +63,14 @@ component persistent="true" table="users" accessors="true"{
      * A struct of custom claims to add to the JWT token
      */
     struct function getJwtCustomClaims(){
-		return {};
+		return [ "role" : "admin" ];
 	}
 
     /**
      * This function returns an array of all the scopes that should be attached to the JWT token that will be used for authorization.
      */
 	array function getJwtScopes(){
-		return [];
+		return variables.permissions;
 	}
 
     /**
@@ -79,7 +80,15 @@ component persistent="true" table="users" accessors="true"{
      *
      */
     boolean function hasPermission( required permission ){
-		return true;
+		if ( isSimpleValue( arguments.permission ) ) {
+			arguments.permission = listToArray( arguments.permission );
+		}
+
+		return arguments.permission
+			.filter( function(item){
+				return ( variables.permissions.findNoCase( item ) );
+			} )
+			.len();
 	}
 
     /**
