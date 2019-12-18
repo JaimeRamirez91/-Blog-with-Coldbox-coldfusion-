@@ -1,7 +1,7 @@
 /**
 * A cool users entity
 */
-component persistent="true" table="users" accessors="true" {
+component persistent="true" table="users" accessors="true" extends="models.BaseEntity" {
 
 	property name="auth"
 			 inject="authenticationService@cbauth"
@@ -35,6 +35,7 @@ component persistent="true" table="users" accessors="true" {
 			 ormtype="string";
 
 
+
 	// Validation
 	this.constraints = {
 		username    : { required : true, udf : ( value, target ) => {
@@ -50,6 +51,7 @@ component persistent="true" table="users" accessors="true" {
 	// Constructor
 	function init(){
 		variables.permissions = [ "write", "read", "security" ];
+		super.init();
 		return this;
 	}
 	/**
@@ -97,4 +99,5 @@ component persistent="true" table="users" accessors="true" {
     boolean function isLoggedIn(){
 		return auth.isLoggedIn();
 	}
+
 }

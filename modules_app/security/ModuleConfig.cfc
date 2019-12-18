@@ -86,10 +86,6 @@ component {
 		layoutSettings = {
 			defaultLayout = ""
 		};
-		//route( "/:anything", "echo.onInvalidRoute" );
-
-//route( "/:handler/:action" ).end();
-
 
 		// SES Routes
 		routes = [ "config/Router.cfm" ];

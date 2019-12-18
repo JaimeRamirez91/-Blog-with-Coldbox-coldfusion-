@@ -6,18 +6,18 @@
 component singleton accessors="true"{
 
 	// Properties
-	property name="bcrypt"      
+	property name="bcrypt"
 			 inject="@BCrypt";
 
-	property name="qb"          
+	property name="qb"
 			 inject="provider:QueryBuilder@qb";
 
-	property name="auth"        
+	property name="auth"
 			 inject="authenticationService@cbauth";
 
-	property name="populator" 	
+	property name="populator"
 			 inject="wirebox:populator";
-			 
+
 	property name="ormService"
 	         inject="entityService";
 
@@ -30,20 +30,23 @@ component singleton accessors="true"{
     /**
 	 * Create a new Provider and injected by module @security
 	 */
-	User function new() provider="User@security"; // 
+	User function new() provider="User@security"; //
 
    /**
 	* Create  User function
 	*
-	* @user 
+	* @user
 	*/
 	function create( required user ){
 		var qResults = qb.from( "users" )
-			.insert( values = {
-				"name" 		= arguments.user.getName(),
-				"email" 	= arguments.user.getEmail(),
-				"username" 	= arguments.user.getUsername(),
-				"password" 	= bcrypt.hashPassword( arguments.user.getPassword() )
+			.insert( values     = {
+				"name" 		    = arguments.user.getName(),
+				"email" 	    = arguments.user.getEmail(),
+				"username" 	    = arguments.user.getUsername(),
+				"password" 	    = bcrypt.hashPassword( arguments.user.getPassword() ),
+				"isActive"      = 1,
+				"updatedDate"   = now(),
+				"createdDate"   = now()
 			} );
 
 		// populate the id
@@ -55,8 +58,8 @@ component singleton accessors="true"{
     /**
 	 * isValidCredentials
 	 *
-	 * @username 
-	 * @password 
+	 * @username
+	 * @password
 	 */
 	function isValidCredentials( required username, required password ){
 		var oUser = retrieveUserByUsername( arguments.username );
@@ -72,7 +75,7 @@ component singleton accessors="true"{
 	/**
 	 * retrieveUserByUsername
 	 *
-	 * @username 
+	 * @username
 	 */
 	function retrieveUserByUsername( required username ){
 		return populator.populateFromStruct(
@@ -84,7 +87,7 @@ component singleton accessors="true"{
 	/**
 	 * retrieveUserById
 	 *
-	 * @id 
+	 * @id
 	 */
 	function retrieveUserById( required id ){
 		return populator.populateFromStruct(
