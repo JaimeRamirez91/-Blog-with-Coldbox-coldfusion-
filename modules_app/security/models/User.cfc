@@ -34,6 +34,24 @@ component persistent="true" table="users" accessors="true" extends="models.BaseE
 	property name="detail"
 			 ormtype="string";
 
+    /******************************************************************************
+	 *                                                                            *
+	 *                                      Relations                             *
+	 *                                                                            *
+	 ******************************************************************************/
+	 // M2M -> A-la-carte Permissions
+	property name="permissions"
+	singularName="permission"
+	fieldtype="many-to-many"
+	type="array"
+	lazy="extra"
+	cfc="security.models.Permission"
+	cascade="all"
+	fkcolumn="FK_userID"
+	linktable="userPermissions"
+	inversejoincolumn="FK_permissionID"
+	orderby="permission"
+	db_displayColumns="permission";
 
 
 	// Validation
@@ -50,7 +68,8 @@ component persistent="true" table="users" accessors="true" extends="models.BaseE
 
 	// Constructor
 	function init(){
-		variables.permissions = [ "write", "read", "security" ];
+		//variables.permissions = [ "write", "read", "security" ];
+		variables.permissions 		= [];
 		super.init();
 		return this;
 	}
