@@ -94,56 +94,59 @@
 		interceptors = [
 		];
 
-	
+
 		// module setting overrides
 		moduleSettings = {
+/*
+			           // By default all rules are evulated as regular expressions
+					   useRegex = true,
+					   // The WireBox ID of the object to validate rules, optional
+					   validatorModel = “securityService@forgebox”,
+					   // Where to look for security rules
+					   rulesSource = “json”,
+					   // The location of a rules file, aplies to XML and JSON only
+					   rulesFile = expandPath( “/forgebox/config/security.json.cfm” ),
+					   // The global invalid authentication event or URI or URL to go if an invalid authentication occurs
+					   invalidAuthenticationEvent  = “main.index”,
+				   };*/
 
 			cbauth = {
 				// Which class will provide user information for authentication
 				userServiceClass : "UserService@security"
 			},
-		
 			cbSecurity : {
 				// The global invalid authentication event or URI or URL to go if an invalid authentication occurs
-				"invalidAuthenticationEvent"    : "security:Session.onInvalidAuth",
+				"invalidAuthenticationEvent"   	 :	  "security:Session.onInvalidAuth",
 				// Default Authentication Action: override or redirect when a user has not logged in
-				"defaultAuthenticationAction"    : "redirect",
+				"defaultAuthenticationAction"    : 	  "redirect",
 				// The global invalid authorization event or URI or URL to go if an invalid authorization occurs
-				"invalidAuthorizationEvent"        : "security:Session.onInvalidAuthorization",
+				"invalidAuthorizationEvent"      :    "security:Session.onInvalidAuthorization",
 				// Default Authorization Action: override or redirect when a user does not have enough permissions to access something
-				"defaultAuthorizationAction"    : "redirect",
+				"defaultAuthorizationAction"     :    "redirect",
+				//Spesific rules surces
+				"rulesSource" = "json", // Recordar a Luis para actualizar documentacion
 				// You can define your security rules here or externally via a source
-				"rules"                            : [],
+				"rulesFile" 						 :     "config/security.json.cfm",
 				// The validator is an object that will validate rules and annotations and provide feedback on either authentication or authorization issues.
-				"validator"                        : "CBAuthValidator@cbsecurity",
+				"validator"                      : "CBAuthValidator@cbsecurity",
 				// The WireBox ID of the authentication service to use in cbSecurity which must adhere to the cbsecurity.interfaces.IAuthService interface.
 				"authenticationService"          : "authenticationService@cbauth",
 				// WireBox ID of the user service to use
-				"userService"                     : "UserService@security",
+				"userService"                    : "UserService@security",
 				// The name of the variable to use to store an authenticated user in prc scope if using a validator that supports it.
-				"prcUserVariable"                 : "oCurrentUser",
-				// If source is model, the wirebox Id to use for retrieving the rules
-				"rulesModel"                    : "",
+				"prcUserVariable"                : "oCurrentUser",
 				// If source is model, then the name of the method to get the rules, we default to `getSecurityRules`
-				"rulesModelMethod"                : "getSecurityRules",
-				// If source is db then the datasource name to use
-				"rulesDSN"                        : "",
-				// If source is db then the table to get the rules from
-				"rulesTable"                    : "",
-				// If source is db then the ordering of the select
-				"rulesOrderBy"                    : "",
-				// If source is db then you can have your custom select SQL
-				"rulesSql"                         : "",
+				"rulesModelMethod"               : "getSecurityRules",
 				// Use regular expression matching on the rule match types
-				"useRegex"                         : true,
+				"useRegex"                       : true,
 				// Force SSL for all relocations
-				"useSSL"                        : false,
+				"useSSL"                         : false,
 				// Auto load the global security firewall
-				"autoLoadFirewall"                : true,
+				"autoLoadFirewall"               : true,
 				// Activate handler/action based annotation security
-				"handlerAnnotationSecurity"        : true,
+				"handlerAnnotationSecurity"      : true,
 				// Activate security rule visualizer, defaults to false by default
-				"enableSecurityVisualizer"        : true,
+				"enableSecurityVisualizer"       : true,
 				// JWT Settings
 				"jwt"                             : {
 					// The jwt secret encoding key to use
@@ -158,8 +161,6 @@
 					"refreshExpiration"       : 43200,
 					// encryption algorithm to use, valid algorithms are: HS256, HS384, and HS512
 					"algorithm"               : "HS512",
-					// Which claims neds to be present on the jwt token or `TokenInvalidException` upon verification and decoding
-					"requiredClaims"          : [] ,
 					// The token storage settings
 					"tokenStorage"            : {
 						// enable or not, default is true

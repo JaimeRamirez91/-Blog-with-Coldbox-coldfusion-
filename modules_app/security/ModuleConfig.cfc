@@ -75,28 +75,10 @@ component {
 		// module settings - stored in modules.name.settings
 		settings = {
 			// CB Security Module Settings
-			
+
 			cbsecurity : {
-				// Module Relocation when an invalid access is detected, instead of each rule declaring one.
-				"invalidAuthenticationEvent"  : "security:Session.onInvalidAuth",
-				// Default Auhtentication Action: override or redirect when a user has not logged in
-				"defaultAuthenticationAction" : "override",
-				// Module override event when an invalid access is detected, instead of each rule declaring one.
-				"invalidAuthorizationEvent"   : "security:Session.onInvalidAuthorization",
-				// Default invalid action: override or redirect when an invalid access is detected, default is to redirect
-				"defaultAuthorizationAction"  : "override",
-				// The validator to use for this module
-				"validator"                   : "JWTService@cbsecurity",
-				// You can define your security rules here or externally via a source
-				"rules"                       : [
-					   
-						  { "secureList" 	:  "security:Home\.*",
-						  	"match"			:  "event",
-						    "roles"			:  "admin",
-						    "permissions"   :  "read" 
-						  } ,
-						  
-					 ]
+			    // this rules to be inside coldox:cbsecurity config :  json.cfm file
+				"rules"                       : []
 			}
 		}
 
@@ -111,11 +93,6 @@ component {
 
 		// SES Routes
 		routes = [ "config/Router.cfm" ];
-
-		// SES Resources
-		/*resources = [
-		    { resource="registration" }
-		];*/
 
 		// Custom Declared Points
 		interceptorSettings = {

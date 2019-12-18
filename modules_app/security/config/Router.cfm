@@ -5,16 +5,20 @@
  */
 
 <cfscript>
-        
+
         //Default
-        route( pattern="/", handler="home", action="index" );  
+        get("/", "home.index");
+       // route( pattern="/", handler="home", action="index" );
 
         //Register Users
         resources( resource="registration", only="create" );
 
+        //redirect
+        get("/sessions/invalidOuth", "session.onInvalidAuth");
+
         //custom route for login and logout
         post("/login",  "auth.login");
-        post("/logout", "auth.logout");  
+        post("/logout", "auth.logout");
 
         //General router
         route(  pattern="/:handler/:action?" );

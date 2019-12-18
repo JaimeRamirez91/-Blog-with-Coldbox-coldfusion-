@@ -1,40 +1,40 @@
 /**
 * A cool users entity
 */
-component persistent="true" table="users" accessors="true"{
-	
-	property name="auth" 
-			 inject="authenticationService@cbauth" 
+component persistent="true" table="users" accessors="true" {
+
+	property name="auth"
+			 inject="authenticationService@cbauth"
 			 persistent="false"; // persistent="false" this is ingnored by ORM
 
-	property name="qb" 
-			 inject="provider:QueryBuilder@qb" 
+	property name="qb"
+			 inject="provider:QueryBuilder@qb"
 			 persistent="false"; // persistent="false" this is ingnored by ORM
 
 	// Primary Key
-	property name="id" 
-			 fieldtype="id" 
+	property name="id"
+			 fieldtype="id"
 			 column="id"
-			 generator="native" 
+			 generator="native"
 			 setter="true";
-	
+
 	// Properties
-	property name="name" 
+	property name="name"
 			 ormtype="string";
-	property name="email" 
+	property name="email"
 			 ormtype="string";
-	property name="username" 
+	property name="username"
 			 ormtype="string";
-	property name="password" 
+	property name="password"
 		     ormtype="string";
-	property name="createdDate" 
+	/*property name="createdDate"
 			 ormtype="date";
-	property name="modifiedDate" 
+	property name="modifiedDate" */
 			 ormtype="date";
 	property name="detail"
 			 ormtype="string";
-	
-	
+
+
 	// Validation
 	this.constraints = {
 		username    : { required : true, udf : ( value, target ) => {
@@ -49,7 +49,7 @@ component persistent="true" table="users" accessors="true"{
 
 	// Constructor
 	function init(){
-		variables.permissions = [ "write", "read" ];
+		variables.permissions = [ "write", "read", "security" ];
 		return this;
 	}
 	/**
@@ -98,6 +98,3 @@ component persistent="true" table="users" accessors="true"{
 		return auth.isLoggedIn();
 	}
 }
-
-
-
