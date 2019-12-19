@@ -22,7 +22,7 @@ component extends = "handlers.BaseHandler"{
 		//generate query for verification
 										//https://coldbox-security.ortusbooks.com/jwt/jwt-services#jwt-methods
 	  prc.response															//customClaims for implement Roles
-		.setData( jwtAuth().attempt( usr.getUsername(), usr.getPassword(),  {"roles": ["admin", "user"] }) )
+		.setData( jwtAuth().attempt( usr.getUsername(), usr.getPassword()) )
 		.addMessage( "Bearer token created and it expires in #jwtAuth().getSettings().jwt.expiration# minutes" );
 
 	}

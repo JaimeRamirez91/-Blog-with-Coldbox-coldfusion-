@@ -49,7 +49,19 @@
 
 		// custom settings
 		settings = {
-
+			autoRegisterInterceptor = true,
+			allowOrigins = function( event ) {
+				return event.getHTTPHeader( "Origin", "*" );
+			},
+			allowMethods = function( event ) {
+				return event.getHTTPMethod();
+			},
+			allowHeaders = function( event ) {
+				return event.getHTTPHeader( "Access-Control-Request-Headers", "" );
+			},
+			maxAge = 60 * 60 * 24, // 1 day
+			allowCredentials = true,
+			eventPattern = ".*"
 		};
 
 		// environment settings, create a detectEnvironment() method to detect it yourself.
@@ -209,6 +221,7 @@
 		*/
 
 	}
+
 
 	/**
 	* Development environment

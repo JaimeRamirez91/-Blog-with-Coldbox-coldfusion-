@@ -1,8 +1,11 @@
 /**
 * A cool users entity
 */
-component persistent="true" table="users" accessors="true" extends="models.BaseEntity" {
-
+component persistent="true"
+	table="users"
+	accessors="true"
+	 extends="models.BaseEntity"
+{
 	property name="auth"
 			 inject="authenticationService@cbauth"
 			 persistent="false"; // persistent="false" this is ingnored by ORM
@@ -27,9 +30,6 @@ component persistent="true" table="users" accessors="true" extends="models.BaseE
 			 ormtype="string";
 	property name="password"
 		     ormtype="string";
-	/*property name="createdDate"
-			 ormtype="date";
-	property name="modifiedDate" */
 			 ormtype="date";
 	property name="detail"
 			 ormtype="string";
@@ -68,8 +68,7 @@ component persistent="true" table="users" accessors="true" extends="models.BaseE
 
 	// Constructor
 	function init(){
-		//variables.permissions = [ "write", "read", "security" ];
-		variables.permissions 		= [];
+		//variables.permissions = getPermissionsByUserId();
 		super.init();
 		return this;
 	}
@@ -91,7 +90,7 @@ component persistent="true" table="users" accessors="true" extends="models.BaseE
      * This function returns an array of all the scopes that should be attached to the JWT token that will be used for authorization.
      */
 	array function getJwtScopes(){
-		return variables.permissions;
+		 return getPermissionsByUserId();
 	}
 
     /**
@@ -107,7 +106,7 @@ component persistent="true" table="users" accessors="true" extends="models.BaseE
 
 		return arguments.permission
 			.filter( function(item){
-				return ( variables.permissions.findNoCase( item ) );
+				return ( getPermissionsByUserId().findNoCase( item ) );
 			} )
 			.len();
 	}
@@ -119,4 +118,37 @@ component persistent="true" table="users" accessors="true" extends="models.BaseE
 		return auth.isLoggedIn();
 	}
 
+
+	/**
+	* test
+	*/
+	array function getPermissionsByUserId(){
+		response = [ ];
+		var qryResult = queryExecute(
+				"
+				SELECT perms.permission AS 'permissionsIsActive'
+					FROM userPermissions usr_perm
+						JOIN permissions perms
+						JOIN users usr
+							WHERE usr.id = usr_perm.FK_userID
+								AND   perms.permissionId = usr_perm.FK_permissionID
+								AND   perms.isActive = 1
+								AND   usr.isActive   = 1
+								AND   usr.id = :id
+				",
+				[ id = getId() ],
+				{
+					returnType : "array"
+				}
+				);
+		try {
+			for ( element in qryResult ) {
+				response.append( element.permissionsIsActive );
+			}
+		} catch (exType exName) {
+			//pass none result
+		}
+
+	return response;
+	}
 }

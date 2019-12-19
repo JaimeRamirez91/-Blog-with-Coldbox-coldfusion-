@@ -4,6 +4,7 @@
 component
 	persistent="true"
 	table="permissions"
+	accessors="true"
 	extends="models.BaseEntity"
 {
 

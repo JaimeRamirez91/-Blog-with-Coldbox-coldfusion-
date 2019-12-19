@@ -35,7 +35,8 @@
         "qb":"modules/qb/",
         "BCrypt":"modules/BCrypt/",
         "mementifier":"modules/mementifier/",
-        "cbsecurity":"modules/cbsecurity/"
+        "cbsecurity":"modules/cbsecurity/",
+        "cors":"modules/cors/"
     },
     "dependencies":{
         "coldbox":"^5.0.0",
@@ -46,7 +47,8 @@
         "qb":"^6.5.0",
         "BCrypt":"^2.5.0-snapshot",
         "mementifier":"^1.9.0+59",
-        "cbsecurity":"^2.1.0+66"
+        "cbsecurity":"^2.1.0+66",
+        "cors":"^3.0.1"
     },
     "scripts":{}
 }
