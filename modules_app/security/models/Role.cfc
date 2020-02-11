@@ -7,7 +7,6 @@ component
 	accessors="true"
 	extends="models.BaseEntity"
 {
-
 	// Primary Key
 	property
 		name="id"

@@ -14,10 +14,9 @@ component extends = "handlers.BaseHandler"{
 	*/
 	function login( event, rc, prc ){
 		var usr = populateModel( ormService.new( "User" ) );
-		usr.setName( "jaime" );
-		usr.setEmail( "q@gmail.com" );
-		usr.setUsername( "jaime" );
-		usr.setPassword( "1234") ;
+       // writeDump(rc); abort;
+		usr.setUsername( rc.name );
+		usr.setPassword( rc.password) ;
 
 		//generate query for verification
 										//https://coldbox-security.ortusbooks.com/jwt/jwt-services#jwt-methods

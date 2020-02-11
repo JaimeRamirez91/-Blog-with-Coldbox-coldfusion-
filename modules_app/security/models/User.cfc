@@ -1,10 +1,11 @@
 /**
 * A cool users entity
 */
-component persistent="true"
+component
+    persistent="true"
 	table="users"
 	accessors="true"
-	 extends="models.BaseEntity"
+	extends="models.BaseEntity"
 {
 	property name="auth"
 			 inject="authenticationService@cbauth"
@@ -40,18 +41,19 @@ component persistent="true"
 	 *                                                                            *
 	 ******************************************************************************/
 	 // M2M -> A-la-carte Permissions
-	property name="permissions"
-	singularName="permission"
-	fieldtype="many-to-many"
-	type="array"
-	lazy="extra"
-	cfc="security.models.Permission"
-	cascade="all"
-	fkcolumn="FK_userID"
-	linktable="userPermissions"
-	inversejoincolumn="FK_permissionID"
-	orderby="permission"
-	db_displayColumns="permission";
+	property
+		name="permissions"
+		singularName="permission"
+		fieldtype="many-to-many"
+		type="array"
+		lazy="extra"
+		cfc="security.models.Permission"
+		cascade="all"
+		fkcolumn="FK_userID"
+		linktable="userPermissions"
+		inversejoincolumn="FK_permissionID"
+		orderby="permission"
+		db_displayColumns="permission";
 
 
 	// Validation
@@ -120,7 +122,7 @@ component persistent="true"
 
 
 	/**
-	* test
+	* PermissionsByUserId
 	*/
 	array function getPermissionsByUserId(){
 		response = [ ];
